@@ -1,16 +1,80 @@
-# React + Vite
+# Libro de Clases Digital — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interfaz web para el sistema de gestion academica del Colegio Bernardo O'Higgins. Consume los microservicios del backend a traves del API Gateway.
 
-Currently, two official plugins are available:
+## Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 18
+- Vite
+- React Router DOM
+- Axios
+- Bootstrap 5
+- Nginx (produccion)
 
-## React Compiler
+## Paginas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Pagina | Ruta | Descripcion |
+|--------|------|-------------|
+| Asignaturas | `/` | CRUD de asignaturas |
+| Cursos | `/cursos` | CRUD de cursos |
+| Alumnos | `/alumnos` | CRUD de alumnos |
+| Profesores | `/profesores` | CRUD de profesores |
+| Evaluaciones | `/evaluaciones` | CRUD de evaluaciones |
+| Asistencia | `/asistencia` | Registro de asistencia |
+| Anotaciones | `/anotaciones` | Anotaciones de conducta |
+| Mensajes | `/mensajes` | Envio y lectura de mensajes |
 
-## Expanding the ESLint configuration
+## Estructura
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+├── api/
+│   └── axios.js            Instancia Axios configurada
+├── components/
+│   └── Navbar.jsx           Navegacion principal
+├── pages/
+│   ├── Asignaturas.jsx
+│   ├── Cursos.jsx
+│   ├── Alumnos.jsx
+│   ├── Profesores.jsx
+│   ├── Evaluaciones.jsx
+│   ├── Asistencia.jsx
+│   ├── Anotaciones.jsx
+│   └── Mensajes.jsx
+├── App.jsx                  Rutas de la aplicacion
+└── main.jsx                 Punto de entrada
+```
+
+## Desarrollo local
+
+```bash
+npm install
+npm run dev
+```
+
+Configurar la URL del API Gateway con variable de entorno:
+
+```bash
+VITE_API_URL=http://localhost:8080 npm run dev
+```
+
+## Despliegue con Docker
+
+El frontend se despliega como contenedor Nginx dentro del `docker-compose.yml` del backend.
+
+```bash
+# Clonar ambos repositorios en el mismo directorio
+git clone https://github.com/Fr4nk13d3vs/LibroClaseDigital.git
+git clone https://github.com/Fr4nk13d3vs/LibroClaseDigitalWEB.git
+
+# Levantar todo (incluye frontend en puerto 3000)
+cd LibroClaseDigital
+docker compose up -d --build
+```
+
+Acceder desde el navegador: `http://IP_SERVIDOR:3000`
+
+## Backend
+
+El backend con los microservicios se encuentra en:
+https://github.com/Fr4nk13d3vs/LibroClaseDigital
